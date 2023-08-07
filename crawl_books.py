@@ -37,11 +37,11 @@ def get_books(**kwargs):
                 publish_company = book.select_one('td.goodsTxtInfo > div').text.split('|')[1].strip()
                 publish_date = book.select_one('td.goodsTxtInfo > div').text.split('|')[2].split('\r')[0].strip()
                 price = int(book.select_one('td.goodsTxtInfo > p:nth-child(3) > span.priceB').text.split('원')[0].replace(',', ''))
-
-                daily_top200_book_list.append([rank, title, author_name, price,publish_company, publish_date, review_count])
+                link = "https://www.yes24.com" + book.select_one('td.goodsTxtInfo > p:nth-child(1) > a:nth-child(1)')['href']
+                daily_top200_book_list.append([rank, title, author_name, price,publish_company, publish_date, review_count, link])
                 rank += 1 
 
-    data = pd.DataFrame(daily_top200_book_list, columns=['rank', 'title', 'author', 'price', 'publishing_house', 'publication_date', 'review_count'])
+    data = pd.DataFrame(daily_top200_book_list, columns=['rank', 'title', 'author', 'price', 'publishing_house', 'publication_date', 'review_count', 'link'])
         # DataFrame을 XCom에 저장하여 다른 작업으로 전달합니다.
     # kwargs['ti'].xcom_push(key='data', value=data)
     # data.to_csv('/opt/airflow/dags/crawl_data/generative_ai_data.csv', index=False, encoding='utf-8-sig')

@@ -37,7 +37,8 @@ with DAG(
         price integer,
         publishing_house text,
         publication_date text,
-        review_count integer
+        review_count integer,
+        link text
         )
         '''
     )
