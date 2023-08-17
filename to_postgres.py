@@ -11,11 +11,11 @@ def save_to_postgres(**kwargs):
     ti = kwargs['ti']
     df = ti.xcom_pull(task_ids='get_books', key='data') 
     # PostgreSQL 연결 정보 설정
-    db_username = 'ehddy'
-    db_password = '4631'
-    db_host = '172.28.0.2'
+    db_username = 'airflow'
+    db_password = 'airflow'
+    db_host = 'postgres'
     db_port = '5432'
-    db_name = 'airflow_book'
+    db_name = 'airflow'
 
     # SQLAlchemy 엔진 생성
     db_url = f'postgresql://{db_username}:{db_password}@{db_host}:{db_port}/{db_name}'
